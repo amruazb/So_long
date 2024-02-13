@@ -10,11 +10,8 @@ FLAGS    := -Wall -Wextra -Werror
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRCS        :=      ft_printf.c \
-                          get_next_line.c \
-                          so_long.c \
-						  maputilities.c \
-						  maputilities2.c \
+SRCS        :=      ft_printf.c get_next_line.c so_long.c maputilities.c \
+								 maputilities2.c map_utilities3.c utils.c \
 
                           
 OBJS        := $(SRCS:.c=.o)

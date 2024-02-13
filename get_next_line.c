@@ -41,38 +41,7 @@ char *get_next_line(int fd)
     return buffer;
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	const char	*s;
-	char		*d;
 
-	s = src;
-	d = dst;
-	if (dst == NULL && src == NULL)
-	{
-		return (NULL);
-	}
-	while (n-- > 0)
-	{
-		*d++ = *s++;
-	}
-	return (dst);
-}
-void	*ft_realloc(void *ptr, size_t newsize)
-{
-	char	*newptr;
-	size_t	cursize;
-
-	if (ptr == 0)
-		return (malloc(newsize));
-	cursize = sizeof(ptr);
-	if (newsize <= cursize)
-		return (ptr);
-	newptr = malloc(newsize);
-	ft_memcpy(ptr, newptr, cursize);
-	free(ptr);
-	return (newptr);
-}
 /* int main()
 {
     int fd = open("so_long.c", O_RDONLY);

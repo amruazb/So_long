@@ -5,7 +5,7 @@ char **ft_split(char *s)
 	int i = 0;
 	int j = 0;
 	int k;
-	char **split = malloc(1024);
+	char **split = malloc(16384);
 	while(s[i] == 32)
 		i++;
 	while(s[i])
@@ -13,7 +13,7 @@ char **ft_split(char *s)
 		if(s[i] > 32)
 		{
 			k = 0;
-			split[j] = malloc(1024);
+			split[j] = malloc(16384);
 			while(s[i] > 32)
 			{
 				split[j][k++] = s[i++];
@@ -65,7 +65,7 @@ t_dimensions get_map_dimensions(char *filename)
     return dimensions;
 }
 
-size_t ft_strlen(char *s)
+size_t ft_strlen(const char *s)
 {
     int i = 0;
     while(s[i])
@@ -75,23 +75,16 @@ size_t ft_strlen(char *s)
 
 int berfile(char *filename)
 {
-    char *fileextension;
-   
-   fileextension = ".ber";
-    while(*filename)
-    {
-        if(*filename == *fileextension)
-            fileextension++;
-        filename++;
-    }
-    if(!*filename && !*fileextension)
+    const char *extension = ".ber";
+    size_t len = ft_strlen(extension);
+    if (ft_strcmp(filename + ft_strlen(filename) - len, extension) == 0)
         return 1;
-
-    ft_printf("Error:It is Not a valid file extension!\n");
-    usleep(1000000);
+    ft_printf("Error: It is Not a valid file extension!\n");
     ft_printf("Try a '.ber' file");
     return 0;
 }
+
+
 t_map *get_map_array(char *filename, t_dimensions dimensions)
 {
 	int fd;
@@ -103,11 +96,9 @@ t_map *get_map_array(char *filename, t_dimensions dimensions)
 	read(fd, line, dimensions.length * dimensions.breadth + dimensions.breadth);
 	close(fd);
 	map->map_array = ft_split(line);
-	////
 	char **tmp = map->map_array;
 	while(*tmp)
 		printf("%s\n",*tmp++);
-	////
-	return map; // final line
+	return map;
 }
 
