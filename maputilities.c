@@ -60,6 +60,8 @@ t_dimensions get_map_dimensions(char *filename)
 		free(line);
 	}
 	close(fd);
+	dimensions.length--;
+	printf("Length: %zu\nBreadth: %zu\n", dimensions.length, dimensions.breadth);
     return dimensions;
 }
 
@@ -90,18 +92,22 @@ int berfile(char *filename)
     ft_printf("Try a '.ber' file");
     return 0;
 }
-void get_map_array(char *filename, t_dimensions dimensions)
+t_map *get_map_array(char *filename, t_dimensions dimensions)
 {
 	int fd;
 	char *line;
-	t_map *map = malloc(16384);
+	t_map *map = malloc(sizeof(t_map)* 1024);
 
 	line = malloc(dimensions.length * dimensions.breadth);
-	fd =open(filename, O_RDONLY);
-	read(fd, line, dimensions.length * dimensions.breadth);
+	fd = open(filename, O_RDONLY);
+	read(fd, line, dimensions.length * dimensions.breadth + dimensions.breadth);
 	close(fd);
 	map->map_array = ft_split(line);
-	while(*map->map_array)
-		printf("%s",*map->map_array++);
+	////
+	char **tmp = map->map_array;
+	while(*tmp)
+		printf("%s\n",*tmp++);
+	////
+	return map; // final line
 }
 

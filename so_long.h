@@ -33,9 +33,13 @@ size_t			ft_strlen(char *s);
 t_dimensions	get_map_dimensions(char *filename);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_realloc(void *ptr, size_t newsize);
-void 			get_map_array(char *filename, t_dimensions dimensions);
+t_map			*get_map_array(char *filename, t_dimensions dimensions);
 
-
+int				is_valid_map(t_map *map_array, t_dimensions dimensions);
+int				is_valid_character(char c);
+int				is_valid_map_character_count(t_map *map_array, t_dimensions dimensions);
+int				is_valid_map_wall(t_map *map_array, t_dimensions dimensions);
+int				is_valid_map_structure(t_map *map_array, t_dimensions dimensions);
 
 #endif
 
