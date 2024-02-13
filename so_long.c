@@ -20,8 +20,9 @@ int main(int ac, char **av)
 		{	
 			ft_printf("map is valid\n");
 		}
-		else{
-			ft_printf("not valida\n");
+		else
+		{
+			ft_printf("not valid map\n");
 		}
         // //printf("Map Dimensions:\nLength: %zu\nBreadth: %zu\n", map_dimensions.length, map_dimensions.breadth);
 
