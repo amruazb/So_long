@@ -87,6 +87,7 @@ int berfile(char *filename)
 
 t_map *get_map_array(char *filename, t_dimensions dimensions)
 {
+	
 	int fd;
 	char *line;
 	t_map *map = malloc(sizeof(t_map)* 1024);

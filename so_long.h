@@ -15,15 +15,24 @@
 
 typedef struct 
 {
-    size_t length;
-    size_t breadth;
+    size_t length;//columns
+    size_t breadth;//rows
 }   t_dimensions;
 
 typedef struct 
 {
 	char **map_array;
-
+	size_t player_x;
+	size_t player_y;
+	int	num_of_collectibles;
+	int count;
 } t_map;
+
+typedef struct
+{
+	void *mlx;
+	void *win;
+}	t_mlx;
 
 int				ft_printf(const char *format,...);
 int				berfile(char *s);
@@ -41,7 +50,10 @@ int				is_valid_character(char c);
 int				is_valid_map_character_count(t_map *map_array, t_dimensions dimensions);
 int				is_valid_map_wall(t_map *map_array, t_dimensions dimensions);
 int				is_valid_map_structure(t_map *map_array, t_dimensions dimensions);
-int				is_valid_path(t_map *map_array, t_dimensions dimensions, int x, int y);
+int				dfs_is_valid_path(t_map *map_array1, t_dimensions dimensions, size_t x, size_t y);
+int				get_number_of_collectibles(t_map *map_array, t_dimensions dimensions);
+
+
 
 
 #endif

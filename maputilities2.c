@@ -79,8 +79,9 @@ int is_valid_map_wall(t_map *map_array, t_dimensions dimensions)
 }
 int is_valid_map(t_map *map_array, t_dimensions dimensions) 
 {
+	map_array->num_of_collectibles = get_number_of_collectibles(map_array, dimensions);
 	if(!is_valid_map_wall(map_array, dimensions) || !is_valid_map_structure(map_array, dimensions) ||
-		!is_valid_map_character_count(map_array, dimensions) || is_valid_path(map_array, dimensions, 0, 0))
+		!is_valid_map_character_count(map_array, dimensions))
 	{
         return 0;
     }
