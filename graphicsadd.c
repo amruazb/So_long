@@ -2,7 +2,7 @@
 
 // typedef struct
 // {
-// 	t_dimensions dimensions;
+// 	t_game dimensions;
 // 	char **map_array;
 // 	size_t player_x;
 // 	size_t player_y;
@@ -21,7 +21,7 @@
 
 
 
-// void add_images(t_mlx *mlx, t_map *map_array, t_dimensions dimensions)
+// void add_images(t_mlx *mlx, t_map *map_array, t_game dimensions)
 // {
 // 	//add a background image
 // 	mlx->background_img_path = "./images/wall/wallnew.xpm";
@@ -33,7 +33,7 @@
 // }
 
 
-// t_map graphical_interface(t_map *map_array, t_dimensions dimensions)
+// t_map graphical_interface(t_map *map_array, t_game dimensions)
 // {
 // 	t_mlx *mlx = malloc(sizeof(t_mlx));
 // 	mlx->mlx = mlx_init();

@@ -28,9 +28,9 @@ char **ft_split(char *s)
 	return split;
 }
 
-t_dimensions get_map_dimensions(char *filename)
+t_game get_map_dimensions(char *filename)
 {
-    t_dimensions dimensions = {0, 0};
+    t_game dimensions = {0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0};
     int fd;
     char *line;
     size_t expected_length;
@@ -85,12 +85,12 @@ int berfile(char *filename)
 }
 
 
-t_map *get_map_array(char *filename, t_dimensions dimensions)
+t_game *get_map_array(char *filename, t_game dimensions)
 {
 	
 	int fd;
 	char *line;
-	t_map *map = malloc(sizeof(t_map)* 1024);
+	t_game *map = malloc(sizeof(t_game)* 1024);
 
 	line = malloc(dimensions.length * dimensions.breadth);
 	fd = open(filename, O_RDONLY);

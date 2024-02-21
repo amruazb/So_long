@@ -1,7 +1,7 @@
-
+/* 
 #include "so_long.h"
 
-void move_player_left(t_map *map_array)
+void move_player_left(t_game *map_array)
 {
     if (map_array->map_array[map_array->player_y][map_array->player_x - 1] != '1')
     {
@@ -11,7 +11,7 @@ void move_player_left(t_map *map_array)
     }
 }
 
-void move_player_down(t_map *map_array)
+void move_player_down(t_game *map_array)
 {
     if (map_array->map_array[map_array->player_y + 1][map_array->player_x] != '1')
     {
@@ -21,7 +21,7 @@ void move_player_down(t_map *map_array)
     }
 }
 
-void move_player_right(t_map *map_array)
+void move_player_right(t_game *map_array)
 {
     if (map_array->map_array[map_array->player_y][map_array->player_x + 1] != '1')
     {
@@ -31,7 +31,7 @@ void move_player_right(t_map *map_array)
     }
 }
 
-void move_player_up(t_map *map_array)
+void move_player_up(t_game *map_array)
 {
     if (map_array->map_array[map_array->player_y - 1][map_array->player_x] != '1')
     {
@@ -43,7 +43,9 @@ void move_player_up(t_map *map_array)
 
 int key_controls(int keycode, void *param)
 {
-    t_map *map_array = (t_map *)param;
+	
+    t_game *map_array = (t_game *)param;
+
 
     if (map_array == NULL) {
         ft_printf("Error: map_array is NULL\n");
@@ -90,3 +92,4 @@ int key_controls(int keycode, void *param)
     return (0);
 }
 
+ */

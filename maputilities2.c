@@ -10,7 +10,7 @@ int is_valid_character(char c)
 	return 1;
 }
 
-int is_valid_map_structure(t_map *map_array, t_dimensions dimensions)
+int is_valid_map_structure(t_game *map_array, t_game dimensions)
 {
 	size_t i = 0;
 	size_t j = 0;
@@ -28,7 +28,7 @@ int is_valid_map_structure(t_map *map_array, t_dimensions dimensions)
 	return 1;
 }
 
-int is_valid_map_character_count(t_map *map_array, t_dimensions dimensions)
+int is_valid_map_character_count(t_game *map_array, t_game dimensions)
 {
 	size_t exit = 0;
 	size_t player = 0;
@@ -58,7 +58,7 @@ int is_valid_map_character_count(t_map *map_array, t_dimensions dimensions)
 	return 1;
 }
 
-int is_valid_map_wall(t_map *map_array, t_dimensions dimensions)
+int is_valid_map_wall(t_game *map_array, t_game dimensions)
 {
 	size_t i = 0;
 
@@ -77,7 +77,7 @@ int is_valid_map_wall(t_map *map_array, t_dimensions dimensions)
 	}
 	return 1;
 }
-int is_valid_map(t_map *map_array, t_dimensions dimensions) 
+int is_valid_map(t_game *map_array, t_game dimensions) 
 {
 	map_array->num_of_collectibles = get_number_of_collectibles(map_array, dimensions);
 	if(!is_valid_map_wall(map_array, dimensions) || !is_valid_map_structure(map_array, dimensions) ||

@@ -1,8 +1,8 @@
 #include "so_long.h"
 
-t_map *get_player_position(t_map *map_array, t_dimensions dimensions, char character)
+t_game *get_player_position(t_game *map_array, t_game dimensions, char character)
 {
-    t_map *map_array1 = malloc(sizeof(t_map));
+    t_game *map_array1 = malloc(sizeof(t_game));
     map_array1->map_array = map_array->map_array;
     size_t i = 0;
     size_t j = 0;
@@ -28,7 +28,7 @@ t_map *get_player_position(t_map *map_array, t_dimensions dimensions, char chara
     return NULL;
 }
 
-// void flood_fill(t_map *map_array, t_dimensions dimensions, size_t x, size_t y)
+// void flood_fill(t_game *map_array, t_game dimensions, size_t x, size_t y)
 // {
 // 	if (x < 0 || x >= dimensions.breadth || y < 0 || y >= dimensions.length)
 // 		return;
@@ -46,7 +46,7 @@ t_map *get_player_position(t_map *map_array, t_dimensions dimensions, char chara
 // }
 
 
-int get_number_of_collectibles(t_map *map_array, t_dimensions dimensions)
+int get_number_of_collectibles(t_game *map_array, t_game dimensions)
 {
 	size_t i = 0;
 	size_t j = 0;
