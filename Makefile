@@ -1,3 +1,8 @@
+#  |  |  ___ \    \  |         |
+#  |  |     ) |  |\/ |   _  |  |  /   _ 
+# ___ __|  __/   |   |  (   |    <    __/ 
+#    _|  _____| _|  _| \__,_| _|\_\ \___|
+#                              by jcluzet
 ################################################################################
 #                                     CONFIG                                   #
 ################################################################################
@@ -5,14 +10,20 @@
 NAME        := so_long
 CC        := clang
 FLAGS    := -Wall -Wextra -Werror 
-
 ################################################################################
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRCS        :=      ft_printf.c get_next_line.c so_long.c maputilities.c \
-								 maputilities2.c map_utilities3.c utils.c \
-
+SRCS        :=      controls.c \
+                          createmap.c \
+                          ft_printf.c \
+                          get_next_line.c \
+                          map_utilities3.c \
+                          maputilities.c \
+                          maputilities2.c \
+                          so_long.c \
+                          utils.c \
+                          graphicsadd.c \
                           
 OBJS        := $(SRCS:.c=.o)
 
@@ -84,3 +95,7 @@ fclean:		clean
 endif
 
 re:			fclean all
+
+.PHONY:		all clean fclean re
+
+
