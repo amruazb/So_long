@@ -46,6 +46,8 @@ typedef struct
 	char *img_player;
 	int move_count;
 	int end_game;
+	int img_width;
+	int img_height;
 } t_game;
 
 int				ft_printf(const char *format,...);
@@ -53,8 +55,8 @@ int				berfile(char *s);
 char			*get_next_line(int fd);
 char			**ft_split(char *s);
 int				ft_strcmp(const char *s1, const char *s2);
-void			*ft_memcpy(void *dst, const void *src, size_t n);
-void			*ft_realloc(void *ptr, size_t newsize);
+void	*ft_realloc(void *ptr, size_t newsize);
+
 size_t			ft_strlen(const char *s);
 t_game			*get_map_array(char *filename, t_game dimensions);
 t_game	get_map_dimensions(char *filename);
@@ -69,7 +71,9 @@ t_game			*get_player_position(t_game *map_array, t_game dimensions, char charact
 //void			add_images(t_game *mlx, t_game *map_array, t_game dimensions);
 
 //int				dfs_is_valid_path(t_game *map_array1, t_game dimensions, size_t x, size_t y);
-t_game		graphical_interface(t_game *map_array, t_game dimensions);
+void		graphical_interface(t_game *game);
+
+
 
 // void 			animate_birds(int keycode, void *param);
 //int				key_controls(int keycode, t_game *map_array);

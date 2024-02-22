@@ -2,8 +2,7 @@
 
 t_game *get_player_position(t_game *map_array, t_game dimensions, char character)
 {
-    t_game *map_array1 = malloc(sizeof(t_game));
-    map_array1->map_array = map_array->map_array;
+	    map_array->map_array = map_array->map_array;
     size_t i = 0;
     size_t j = 0;
     while (i < dimensions.breadth)
@@ -11,20 +10,20 @@ t_game *get_player_position(t_game *map_array, t_game dimensions, char character
         j = 0;
         while (j < dimensions.length)
         {
-            if (map_array1->map_array[i][j] == character)
+            if (map_array->map_array[i][j] == character)
             {
-                map_array1->player_x = i;
-                map_array1->player_y = j;
-                printf("Player x: %zu\n", map_array1->player_x);
-				printf("Player y: %zu\n", map_array1->player_y);
-                return map_array1; // return the pointer to the updated structure
+                map_array->player_x = i;
+                map_array->player_y = j;
+                printf("Player x: %zu\n", map_array->player_x);
+				printf("Player y: %zu\n", map_array->player_y);
+                return map_array; // return the pointer to the updated structure
             }
             j++;
         }
         i++;
     }
     printf("Player not found\n");
-    free(map_array1); // free the memory if the player is not found
+    free(map_array); // free the memory if the player is not found
     return NULL;
 }
 

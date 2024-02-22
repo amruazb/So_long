@@ -30,7 +30,7 @@ char **ft_split(char *s)
 
 t_game get_map_dimensions(char *filename)
 {
-    t_game dimensions = {0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0};
+    t_game dimensions = {0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0};
     int fd;
     char *line;
     size_t expected_length;
