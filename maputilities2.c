@@ -79,12 +79,21 @@ int is_valid_map_wall(t_game *map_array, t_game dimensions)
 }
 int is_valid_map(t_game *map_array, t_game dimensions) 
 {
-	map_array->num_of_collectibles = get_number_of_collectibles(map_array, dimensions);
-	if(!is_valid_map_wall(map_array, dimensions) || !is_valid_map_structure(map_array, dimensions) ||
-		!is_valid_map_character_count(map_array, dimensions))
-		//|| !dfs_is_valid_path(map_array, dimensions, 0, 0))
+	//get_number_of_collectibles(map_array, dimensions);
+	if(!is_valid_map_wall(map_array, dimensions))
 	{
-        return 0;
-    }
-	return 1;
+		return 0;
+	}
+	else if(!is_valid_map_structure(map_array, dimensions))
+	{
+		return 0;
+	}
+	// else if(!is_valid_map_character_count(map_array, dimensions))
+	// {
+	// 	return 0;
+	
+	// }
+	else
+		return 1;
+		//|| !dfs_is_valid_path(map_array, dimensions, 0, 0))
 }

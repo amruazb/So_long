@@ -1,11 +1,33 @@
 #include "so_long.h"
 
+
+t_game game_dimensions = {
+    .length = 0,
+    .breadth = 0,
+    .map_array = NULL,
+    .player_x = 0,
+    .player_y = 0,
+    .num_of_collectibles = 0,
+    .count = 0,
+    .mlx = NULL,
+    .win = NULL,
+    .img_background = NULL,
+    .img_wall = NULL,
+    .img_exit = NULL,
+    .img_collectible = NULL,
+    .img_player = NULL,
+    .move_count = 0,
+    .end_game = 0,
+    .img_width = 0,
+    .img_height = 0
+};
+
 char **ft_split(char *s)
 {
 	int i = 0;
 	int j = 0;
 	int k;
-	char **split = malloc(16384);
+	char **split = malloc(sizeof(t_game) * 1024);
 	while(s[i] == 32)
 		i++;
 	while(s[i])
@@ -13,7 +35,7 @@ char **ft_split(char *s)
 		if(s[i] > 32)
 		{
 			k = 0;
-			split[j] = malloc(16384);
+			split[j] = malloc(sizeof(t_game) * 1024);
 			while(s[i] > 32)
 			{
 				split[j][k++] = s[i++];
@@ -28,9 +50,12 @@ char **ft_split(char *s)
 	return split;
 }
 
-t_game get_map_dimensions(char *filename)
+t_game *get_map_dimensions(char *filename)
 {
-    t_game dimensions = {0, 0, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0};
+    t_game *game;
+
+	printf("from get_map_dimensions\n");
+	game = malloc(sizeof(t_game));
     int fd;
     char *line;
     size_t expected_length;
@@ -40,29 +65,38 @@ t_game get_map_dimensions(char *filename)
 	if (fd < 0)
 	{
 		perror("Error opening file\n");
-		return dimensions;
+		return (game);
 	}
+	init_struct(&game);
     while ((line = get_next_line(fd)))
     {
+		printf("\nline = %s\n", line);
+		line = ft_strtrim(line, "\n");
         line_length = ft_strlen(line);
-        if (dimensions.breadth == 0)
-            expected_length = line_length;
+		printf("line_length = %zu\n", line_length);
+		printf("breadth = %zu\n\n", game->breadth);
+        if (game->breadth == 0)
+       	{     
+		expected_length = line_length;
+	   	}
 		else if (expected_length != line_length)
 		{
+			printf("expected_length = %zu\n", expected_length);
+			printf("line_length = %zu\n", line_length);
 			ft_printf("Error: Map file is not rectangular\n");
 			free(line);
 			close(fd);
 			exit(1);
 		}
-		if (line_length > dimensions.length)
-			dimensions.length = line_length;
-		dimensions.breadth++;
+		if (line_length > game->length)
+			game->length = line_length;
+		game->breadth++;
 		free(line);
 	}
 	close(fd);
-	dimensions.length--;
-	printf("Length: %zu\nBreadth: %zu\n", dimensions.length, dimensions.breadth);
-    return dimensions;
+	// game->length--;
+	printf("at end of getmapdimn : Length: %zu\nBreadth: %zu\n", game->length, game->breadth);
+    return (game);
 }
 
 size_t ft_strlen(const char *s)
@@ -85,21 +119,32 @@ int berfile(char *filename)
 }
 
 
-t_game *get_map_array(char *filename, t_game dimensions)
+t_game *get_map_array(char *filename, t_game *game)
 {
 	
 	int fd;
+	int i;
 	char *line;
-	t_game *map = malloc(sizeof(t_game)* 1024);
+	// t_game *game = malloc(sizeof(t_game)* 1024);
 
-	line = malloc(dimensions.length * dimensions.breadth);
+	line = malloc((game->length * game->breadth + game->breadth) + 1);
 	fd = open(filename, O_RDONLY);
-	read(fd, line, dimensions.length * dimensions.breadth + dimensions.breadth);
+	i = read(fd, line, game->length * game->breadth + game->breadth);
+	line[i] = '\0';
 	close(fd);
-	map->map_array = ft_split(line);
-	char **tmp = map->map_array;
-	while(*tmp)
-		printf("%s\n",*tmp++);
-	return map;
+	game->map_array = ft_split(line);
+	printf("\n\nfrom gat map array Map_array : \n");
+	int j = 0;
+	while (game->map_array[j])
+	{
+		printf("%s\n", (game)->map_array[j]);
+		j++;
+	}
+	
+	// char **tmp = map->map_array;
+	// while(*tmp)
+	// 	printf("%s\n",*tmp++);
+	// return (&game);
+	return game;
 }
 

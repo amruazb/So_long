@@ -28,6 +28,8 @@
 
 
 
+
+
 typedef struct
 {
 	size_t length;//columns
@@ -35,7 +37,7 @@ typedef struct
 	char **map_array;
 	size_t player_x;
 	size_t player_y;
-	int	num_of_collectibles;
+	size_t	num_of_collectibles;
 	int count;
 	void *mlx;
 	void *win;
@@ -50,40 +52,40 @@ typedef struct
 	int img_height;
 } t_game;
 
+
+char	*ft_strtrim(char const *s1, char const *set);
+int	finda(char const *s1, char const *set);
+int	sub_find(char c, char const *set);
+void init_struct(t_game **game);
+
+
 int				ft_printf(const char *format,...);
 int				berfile(char *s);
 char			*get_next_line(int fd);
 char			**ft_split(char *s);
 int				ft_strcmp(const char *s1, const char *s2);
-void	*ft_realloc(void *ptr, size_t newsize);
+void			*ft_realloc(void *ptr, size_t newsize);
 
 size_t			ft_strlen(const char *s);
-t_game			*get_map_array(char *filename, t_game dimensions);
-t_game	get_map_dimensions(char *filename);
-
+t_game 			*get_map_array(char *filename, t_game *game);
+t_game 			*get_map_dimensions(char *filename);
 int				is_valid_map(t_game *map_array, t_game dimensions);
 int				is_valid_character(char c);
 int				is_valid_map_character_count(t_game *map_array, t_game dimensions);
 int				is_valid_map_wall(t_game *map_array, t_game dimensions);
 int				is_valid_map_structure(t_game *map_array, t_game dimensions);
-int				get_number_of_collectibles(t_game *map_array, t_game dimensions);
-t_game			*get_player_position(t_game *map_array, t_game dimensions, char character);
-//void			add_images(t_game *mlx, t_game *map_array, t_game dimensions);
-
-//int				dfs_is_valid_path(t_game *map_array1, t_game dimensions, size_t x, size_t y);
-void		graphical_interface(t_game *game);
-
-
-
-// void 			animate_birds(int keycode, void *param);
-//int				key_controls(int keycode, t_game *map_array);
-
-// void			move_player_left(t_game *map_array);
-// void			move_player_down(t_game *map_array);
-// void			move_player_right(t_game *map_array);
-// void			move_player_up(t_game *map_array);
-
-
+void			get_player_position(t_game *map_array, char character);
+void			get_number_of_collectibles(t_game *map_array, t_game dimensions);
+void			graphical_interface(t_game *game);
+void			load_images(t_game *game);
+int				game_hook(int keycode, t_game *game);
+int				img_put(t_game *game);
+void	ft_move_player(t_game *game, int a, int b);
+int				finish(t_game *game);
+void			image_free(t_game *game);
+void 			printing(t_game *game);
+int				is_valid_move(t_game *game, int new_x, int new_y);
+void			update_player(t_game *game, int x, int y);
 #endif
 
 // void graphical_interface(t_game *map_array, t_game dimensions)
@@ -138,3 +140,4 @@ void		graphical_interface(t_game *game);
 //     mlx_hook(win, 2, 1L << 0, key_controls, map_array);
 //     mlx_loop(mlx);
 // }
+
