@@ -77,23 +77,45 @@ int is_valid_map_wall(t_game *map_array, t_game dimensions)
 	}
 	return 1;
 }
+
+bool dfs(t_game *game, size_t x, size_t y, bool visited[][game->length]) 
+{
+	if (x < 0 || x >= game->breadth || y < 0 || y >= game->length || game->map_array[x][y] == '1' || visited[x][y]) 
+		return false;
+	visited[x][y] = true;
+	if (game->map_array[x][y] == 'E') 
+		game->exit_found = true;
+	else if (game->map_array[x][y] == 'C')
+		game->collectibles_found++;
+	dfs(game, x + 1, y, visited);
+	dfs(game, x - 1, y, visited);
+	dfs(game, x, y + 1, visited);
+	dfs(game, x, y - 1, visited);
+	return (true);
+}
+
+
+bool is_valid_path(t_game *game) 
+{
+	bool visited[game->breadth][game->length];
+
+	memset(visited, false, sizeof(visited));
+	game->exit_found = false;
+	game->collectibles_found = 0;
+	dfs(game, game->player_y, game->player_x, visited);
+	return game->exit_found && (game->collectibles_found == game->num_of_collectibles);
+}
+
+
 int is_valid_map(t_game *map_array, t_game dimensions) 
 {
-	//get_number_of_collectibles(map_array, dimensions);
 	if(!is_valid_map_wall(map_array, dimensions))
-	{
 		return 0;
-	}
 	else if(!is_valid_map_structure(map_array, dimensions))
-	{
 		return 0;
-	}
-	// else if(!is_valid_map_character_count(map_array, dimensions))
-	// {
-	// 	return 0;
-	
-	// }
-	else
-		return 1;
-		//|| !dfs_is_valid_path(map_array, dimensions, 0, 0))
+	else if(!is_valid_map_character_count(map_array, dimensions))
+		return 0;
+	else if (is_valid_path(map_array) == false)
+		return 0;
+	return (1);
 }
