@@ -1,4 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aabashee <aabashee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/06 04:15:20 by aabashee          #+#    #+#             */
+/*   Updated: 2024/03/10 00:46:09 by aabashee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
+}
 
 void	printing(t_game *game)
 {
@@ -17,20 +41,8 @@ void	printing(t_game *game)
 	printf("Player position: %zu, %zu\n", game->player_x, game->player_y);
 }
 
-void	init_struct(t_game **game)
+void	init_struct2(t_game **game)
 {
-	(*game)->length = 0;
-	(*game)->breadth = 0;
-	(*game)->map_array = NULL;
-	(*game)->player_x = 0;
-	(*game)->player_y = 0;
-	(*game)->num_of_collectibles = 0;
-	(*game)->count = 0;
-	(*game)->mlx = NULL;
-	(*game)->win = NULL;
-	(*game)->img_background = NULL;
-	(*game)->img_wall = NULL;
-	(*game)->img_exit = NULL;
 	(*game)->img_collectible = NULL;
 	(*game)->img_player = NULL;
 	(*game)->img_player2 = NULL;
@@ -52,6 +64,23 @@ void	init_struct(t_game **game)
 	(*game)->img_height = 0;
 }
 
+void	init_struct(t_game **game)
+{
+	(*game)->length = 0;
+	(*game)->breadth = 0;
+	(*game)->map_array = NULL;
+	(*game)->player_x = 0;
+	(*game)->player_y = 0;
+	(*game)->num_of_collectibles = 0;
+	(*game)->count = 0;
+	(*game)->mlx = NULL;
+	(*game)->win = NULL;
+	(*game)->img_background = NULL;
+	(*game)->img_wall = NULL;
+	(*game)->img_exit = NULL;
+	init_struct2(game);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	*game;
@@ -61,7 +90,6 @@ int	main(int ac, char **av)
 		ft_printf("Error: <usage> <so_long> <.ber-file>\n");
 		return (0);
 	}
-	// init_struct(&game);
 	game = get_map_dimensions(av[1]);
 	if (berfile(av[1]))
 	{

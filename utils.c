@@ -1,42 +1,27 @@
-#include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aabashee <aabashee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/06 03:44:21 by aabashee          #+#    #+#             */
+/*   Updated: 2024/03/06 17:39:56 by aabashee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-size_t ft_strlen(const char *s)
-{
-    int i = 0;
-    while(s[i])
-        i++;
-    return i;
-}
+#include "so_long.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-	while(*s1 && (*s1 == *s2))
+	while (*s1 && (*s1 == *s2))
 	{
 		s1++;
-	       	s2++;
+		s2++;
 	}
 	return (*s1 - *s2);
 }
 
-void *ft_realloc(void *ptr, size_t newsize)
-{
-    char *newptr;
-    size_t cursize;
-    if (ptr == NULL)
-        return malloc(newsize);
-    cursize = sizeof(ptr);
-    if (newsize <= cursize)
-        return ptr;
-    newptr = malloc(newsize);
-	size_t i = 0;
-	while(i < cursize) 
-    {
-        ((char *)newptr)[i] = ((char *)ptr)[i];
-			i++;
-    }
-    free(ptr);
-    return newptr;
-}
 void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*ptr;
@@ -47,4 +32,55 @@ void	*ft_memset(void *s, int c, size_t n)
 	while (n-- > 0)
 		*ptr++ = uc;
 	return (s);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	if (!s)
+		return (0);
+	while (*s != (char)c)
+		if (!*s++)
+			return (0);
+	return ((char *)s);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	size_t	i;
+
+	s2 = malloc(ft_strlen(s1) + 1);
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[i] = '\0';
+	return (s2);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*ps1;
+	char	*ptr;
+	int		tlen;
+
+	if (!s1 && !s2)
+		return (0);
+	tlen = ft_strlen(s1) + ft_strlen(s2);
+	ps1 = malloc(sizeof(char) * (tlen + 1));
+	if (!ps1)
+		return (NULL);
+	ptr = ps1;
+	if (s1)
+		while (*s1)
+			*ptr++ = *s1++;
+	if (s2)
+		while (*s2)
+			*ptr++ = *s2++;
+	*ptr = '\0';
+	return (ps1);
 }

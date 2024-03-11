@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aabashee <aabashee@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/06 23:29:43 by aabashee          #+#    #+#             */
+/*   Updated: 2024/03/06 23:30:12 by aabashee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void    put_str(char *str, int *len)
+void	put_str(char *str, int *len)
 {
-    if(!str)
-        str = "(null)";
-    while (*str)
-        *len += write(1, str++,1);
+	if (!str)
+		str = "(null)";
+	while (*str)
+		*len += write(1, str++,1);
 }
 
 void    put_digit(long long int num, int base, int *len)

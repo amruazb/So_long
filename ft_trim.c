@@ -6,7 +6,7 @@
 /*   By: aabashee <aabashee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:11:42 by aabashee          #+#    #+#             */
-/*   Updated: 2024/02/29 14:13:16 by aabashee         ###   ########.fr       */
+/*   Updated: 2024/03/06 23:22:46 by aabashee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,35 @@ char	*ft_strtrim(char const *s1, char const *set)
 		str[i++] = s1[a++];
 	str[i] = '\0';
 	return (str);
+}
+
+void	put_image(t_game *game, char *image)
+{
+	mlx_put_image_to_window(game->mlx, game->win, image,
+		game->img_width * game->player_x,
+		game->img_height * game->player_y);
+}
+
+void	is_map_char_helper(size_t *pl, size_t *ex, size_t *col, t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < game->breadth)
+	{
+		j = 0;
+		while (j < game->length)
+		{
+			if (game->map_array[i][j] == 'P')
+				(*pl)++;
+			else if (game->map_array[i][j] == 'E')
+				(*ex)++;
+			else if (game->map_array[i][j] == 'C')
+				(*col)++;
+			j++;
+		}
+		i++;
+	}
 }
