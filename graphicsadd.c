@@ -6,7 +6,7 @@
 /*   By: aabashee <aabashee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 04:43:29 by aabashee          #+#    #+#             */
-/*   Updated: 2024/03/10 00:50:21 by aabashee         ###   ########.fr       */
+/*   Updated: 2024/03/06 23:13:04 by aabashee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void	graphical_interface(t_game *game)
 			game->breadth * 128, "Falcon's So Long");
 	load_images(game);
 	img_put(game);
-	// mlx_hook(game->win, 2, 1L << 0, game_hook, game);
-	// mlx_hook(game->win, 17, 1L << 0, finish, &game);
-	// mlx_loop_hook(game->mlx, img_put, game);
-	// mlx_loop(game->mlx);
+	mlx_hook(game->win, 2, 1L << 0, game_hook, game);
+	mlx_hook(game->win, 17, 1L << 0, finish, &game);
+	mlx_loop_hook(game->mlx, img_put, game);
+	mlx_loop(game->mlx);
 	return ;
 }
